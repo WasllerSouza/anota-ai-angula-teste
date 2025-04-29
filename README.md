@@ -8,7 +8,7 @@ Bem-vindo ao **AnotaAiTesteWasllerSouza**, um projeto desenvolvido com **Angular
 - **TypeScript**
 - **RxJS**
 - **SCSS** para estilização
-- **Karma** para testes unitários
+- **Jest** para testes unitários
 - **Node.js** e **npm** para gerenciamento de dependências
 
 ## 🚀 Funcionalidades
@@ -57,8 +57,8 @@ npm install -g @angular/cli
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/WasllerSouza/anota-ai-teste-wasller-souza.git
-   cd anota-ai-teste-wasller-souza
+   git clone https://github.com/WasllerSouza/anota-ai-angular-teste.git
+   cd anota-ai-angular-teste
    ```
 
 2. **Instale as dependências**:
