@@ -1,0 +1,224 @@
+// Grid System com Flexbox - HD até 4K
+// Variáveis para breakpoints
+$breakpoints: (
+  xs: 0, // Dispositivos muito pequenos
+  sm: 576px, // Dispositivos pequenos (smartphones)
+  md: 768px, // Dispositivos médios (tablets)
+  lg: 992px, // Dispositivos grandes (desktops)
+  xl: 1200px, // Desktops grandes
+  xxl: 1600px, // Full HD e acima
+  xxxl: 2560px // 4K e acima
+);
+
+// Número de colunas no grid
+$grid-columns: 12;
+
+// Gutter padrão (espaçamento entre colunas)
+$grid-gutter: 30px;
+
+// Containers responsivos
+.container {
+  width: 100%;
+  padding: $grid-gutter / 2;
+  margin: auto;
+
+  @media (min-width: map-get($breakpoints, sm)) {
+    max-width: 540px;
+  }
+
+  @media (min-width: map-get($breakpoints, md)) {
+    max-width: 720px;
+  }
+
+  @media (min-width: map-get($breakpoints, lg)) {
+    max-width: 960px;
+  }
+
+  @media (min-width: map-get($breakpoints, xl)) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: map-get($breakpoints, xxl)) {
+    max-width: 1520px;
+  }
+
+  @media (min-width: map-get($breakpoints, xxxl)) {
+    max-width: 2400px;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  padding: $grid-gutter / 2;
+  margin: auto;
+}
+
+// Linha do grid
+.row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: -($grid-gutter / 2);
+}
+
+// Classes base para todas as colunas
+.col {
+  position: relative;
+  width: 100%;
+  padding: $grid-gutter / 2;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+// Gerar classes de colunas para cada breakpoint
+@each $breakpoint, $width in $breakpoints {
+  $infix: if($breakpoint == xs, "", "-#{$breakpoint}");
+
+  // Colunas com largura específica
+  @for $i from 1 through $grid-columns {
+    .col#{$infix}-#{$i} {
+      position: relative;
+      width: 100%;
+      padding: $grid-gutter / 2;
+    }
+  }
+
+  @if $width > 0 {
+    @media (min-width: $width) {
+      // Classes para tamanho específico em cada breakpoint
+      @for $i from 1 through $grid-columns {
+        .col#{$infix}-#{$i} {
+          flex: 0 0 percentage($i / $grid-columns);
+          max-width: percentage($i / $grid-columns);
+        }
+      }
+
+      // Classes de ordem
+      @for $i from 0 through $grid-columns {
+        .order#{$infix}-#{$i} {
+          order: $i;
+        }
+      }
+
+      // Classes de offset (deslocamento)
+      @for $i from 0 through ($grid-columns - 1) {
+        .offset#{$infix}-#{$i} {
+          margin-left: percentage($i / $grid-columns);
+        }
+      }
+    }
+  } @else {
+    // Classes para xs que não precisam de media query
+    @for $i from 1 through $grid-columns {
+      .col#{$infix}-#{$i} {
+        flex: 0 0 percentage($i / $grid-columns);
+        max-width: percentage($i / $grid-columns);
+      }
+    }
+
+    // Classes de ordem para xs
+    @for $i from 0 through $grid-columns {
+      .order#{$infix}-#{$i} {
+        order: $i;
+      }
+    }
+
+    // Classes de offset para xs
+    @for $i from 0 through ($grid-columns - 1) {
+      .offset#{$infix}-#{$i} {
+        margin-left: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+
+// Utilitários de alinhamento flexbox
+
+// Alinhamento vertical (align-items)
+.align-items-start {
+  align-items: flex-start;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+// Alinhamento horizontal (justify-content)
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
+// Auto margem para empurrar elementos
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+// Classes para esconder/mostrar elementos em diferentes breakpoints
+@each $breakpoint, $width in $breakpoints {
+  $infix: if($breakpoint == xs, "", "-#{$breakpoint}");
+
+  .d#{$infix}-none {
+    display: none;
+  }
+
+  .d#{$infix}-block {
+    display: block;
+  }
+
+  .d#{$infix}-flex {
+    display: flex;
+  }
+
+  @if $width > 0 {
+    @media (min-width: $width) {
+      .d#{$infix}-none {
+        display: none;
+      }
+
+      .d#{$infix}-block {
+        display: block;
+      }
+
+      .d#{$infix}-flex {
+        display: flex;
+      }
+    }
+  }
+}

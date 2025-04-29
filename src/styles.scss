@@ -1,0 +1,190 @@
+/* You can add global styles to this file, and also import other style files */
+@use '_flex-grid' as *;
+@use '_variables' as *;
+@use 'sass:map';
+
+@each $value in $bg-tag-color-names {
+  .tag-#{$value} {
+    background-color: map.get($bg-tag-color, $value);
+    color: #ffffff;
+    border-color: map.get($bg-tag-color, $value);
+    padding: 4px 8px;
+  }
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: system-ui;
+  background-color: #efefef;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+    }
+
+    .title-container {
+      .title {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        margin: 0;
+        color: #666d66;
+      }
+    }
+  }
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+
+  .search-input {
+    width: 50%;
+    height: 44px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    padding: 0 15px;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+  }
+
+  .search-button {
+    width: 44px;
+    height: 46px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: visible;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: transform 0.3s;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-image-container {
+    position: relative;
+    height: 200px;
+    overflow: visible;
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tag {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .close-button {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: #fefefe;
+      border-color: #d7d7d7;
+
+      &:hover {
+        .close-icon {
+          transform: rotate(90deg);
+          filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+        }
+      }
+
+      .close-icon {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+    }
+  }
+
+  .card-content {
+    padding: 15px;
+
+    .card-title {
+      font-size: 18px;
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .card-description {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .settings-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+  }
+}

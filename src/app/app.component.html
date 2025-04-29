@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="logo-container">
+    <img alt="Logo" class="logo" src="https://githubanotaai.github.io/frontend-interview-mock-data/assets/128x128.png">
+    <div class="title-container">
+      <h1 class="title">Teste de Desenvolvedor Front-End - Anota AI</h1>
+      <p class="subtitle">- Wasller Souza -</p>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <form [formGroup]="formGroup" class="search-container">
+    <input
+      class="search-input"
+      formControlName="searchTerm"
+      placeholder="Pesquisar..."
+      type="text">
+    <button class="search-button">
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
+
+  <div class="row">
+    @for (card of filteredCards; track card) {
+      <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3 col-xxl-3">
+        <app-card-galeria [card]="card" (cardChange)="removeCard($event)"/>
+      </div>
+    }
+  </div>
+</div>

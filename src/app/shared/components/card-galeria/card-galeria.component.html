@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-image-container">
+    <img [alt]="card.title" [height]="200" [ngSrc]="card.img" [width]="300" class="card-image" priority>
+    <span [class]="'tag ' + card.tagColor">{{ card.tagName }}</span>
+    <button (click)="removeCard(card.id)" class="close-button">
+      <img [height]="24" [ngSrc]="'https://githubanotaai.github.io/frontend-interview-mock-data/assets/close.svg'"
+           [width]="24" alt="Fechar" class="close-icon">
+    </button>
+  </div>
+  <div class="card-content">
+    <h2 class="card-title">{{ card.title }}</h2>
+    <p class="card-description">{{ card.description }}</p>
+  </div>
+</div>
